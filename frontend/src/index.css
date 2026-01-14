@@ -749,3 +749,55 @@ body.beam-pulse .beam-core {
   transform: translateY(-4px);
 }
 
+.glow-animate {
+  animation: glowMove 6s linear infinite;
+  filter: drop-shadow(0 0 25px rgba(169,124,248,0.35));
+}
+
+
+
+.input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: white;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  border-color: #A97CF8;
+  box-shadow: 0 0 0 3px rgba(169,124,248,0.25);
+}
+
+/* 🌈 NEON BORDER FRAME */
+.neon-frame {
+  background: linear-gradient(
+    120deg,
+    #A97CF8,
+    #F38CB8,
+    #FDCC92,
+    #A97CF8
+  );
+  background-size: 300% 300%;
+  animation: neonMove 6s linear infinite;
+  position: relative;
+}
+
+/* ✨ GLOW ONLY OUTSIDE */
+.neon-frame::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(18px);
+  opacity: 0.55;
+  z-index: -1;
+}
+
+@keyframes neonMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}

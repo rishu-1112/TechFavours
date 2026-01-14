@@ -121,7 +121,7 @@ export default function Navbar() {
                 ${onHero ? "text-white" : "text-white/80"}
               `}
             >
-              {["/", "/Services", "/About", "/Contact"].map((path) => (
+              {["/", "/Services", "/About", "/Contact","/Blog"].map((path) => (
                 <NavLink
                   key={path}
                   to={path}

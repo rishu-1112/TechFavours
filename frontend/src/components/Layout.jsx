@@ -6,9 +6,11 @@ import ShootingStars from "./ShootingStars";
 import Moon from "./Moon";
 import Navbar from "./Navbar";
 import { ScrollProgress } from "./ui/scroll-progress";
+import usePageTracking from "../usePageTracking";
 
 
 export default function Layout() {
+  usePageTracking();
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
