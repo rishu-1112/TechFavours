@@ -1,5 +1,7 @@
 import logo from "@/assets/logo/logo.png";
 import forestImg from "@/assets/footer/forest.png";
+import { Link } from "react-router-dom";
+
 
 export default function Footer() {
   return (
@@ -138,12 +140,23 @@ export default function Footer() {
           <div className="flex gap-16">
             <FooterColumn
               title="Company"
-              links={["About", "Services", "Projects", "Contact"]}
+              links={[
+                { label: "About", path: "/about" },
+                { label: "Services", path: "/services" },
+                { label: "Projects", path: "/projects" },
+                { label: "Contact", path: "/contact" },
+              ]}
             />
+
+
             <FooterColumn
               title="Legal"
-              links={["Privacy Policy", "Terms"]}
+              links={[
+                { label: "Privacy Policy", path: "/privacy-policy" },
+                { label: "Terms", path: "/terms" },
+              ]}
             />
+
           </div>
 
           {/* CTA */}
@@ -179,20 +192,19 @@ export default function Footer() {
   );
 }
 
-/* FOOTER COLUMN */
 function FooterColumn({ title, links }) {
   return (
     <div>
       <h4 className="text-white font-medium mb-3">{title}</h4>
       <ul className="space-y-2">
-        {links.map((link, i) => (
+        {links.map(({ label, path }, i) => (
           <li key={i}>
-            <a
-              href="#"
+            <Link
+              to={path}
               className="text-white/60 hover:text-white transition text-sm"
             >
-              {link}
-            </a>
+              {label}
+            </Link>
           </li>
         ))}
       </ul>

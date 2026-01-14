@@ -12,13 +12,14 @@ import BlogSaaS from "./pages/blog/saas";
 import BlogAI from "./pages/blog/ai";
 import BlogWeb from "./pages/blog/web";
 import BlogPost from "./pages/blog/[slug]";
-
+import ScrollToTop from "./ScrollToTop";
 export default function App() {
   return (
     <BrowserRouter>
       {/* 🖱️ GLOBAL SMOOTH CURSOR */}
       <SmoothCursor />
       <AnimatePresence mode="wait">
+        <ScrollToTop/>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
