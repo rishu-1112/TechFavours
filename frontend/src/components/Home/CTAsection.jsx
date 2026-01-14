@@ -5,6 +5,7 @@ import { motion, useMotionValue, useTransform } from "motion/react";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 /* ---------------- TYPING TEXT ---------------- */
 
@@ -59,7 +60,7 @@ export default function CTASection() {
   const cardRef = useRef(null);
   const [openForm, setOpenForm] = useState(false);
   const [openCalendly, setOpenCalendly] = useState(false);
-
+  const navigate = useNavigate();
   /* Parallax tilt */
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -137,16 +138,12 @@ export default function CTASection() {
           <RainbowButton onClick={() => setOpenForm(true)}>
             Start a Project
           </RainbowButton>
-            <RainbowButton>
-          <button
-            onClick={() => setOpenCalendly(true)}
+            <RainbowButton onClick={() => navigate("/contact")}
             className="
               px-8 py-3
               rounded-full
-            "
-          >
+            ">
             Book a Free Call
-          </button>
           </RainbowButton>
         </div>
       </motion.div>

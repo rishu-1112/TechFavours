@@ -4,6 +4,7 @@ import GlassCard from "../../components/GlassCard";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Globe } from "@/components/ui/globe";
 import { BorderBeam } from "../ui/BorderBeam";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -11,7 +12,7 @@ export default function Hero() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const globeRef = useRef(null);
-
+   const navigate = useNavigate();
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Card entrance
@@ -147,13 +148,14 @@ export default function Hero() {
           </p>
 
           <div className="mt-12 flex gap-4 justify-center flex-wrap">
-            <RainbowButton className="px-8 py-3 shadow-lg shadow-blue-500/20">
+            <RainbowButton className="px-8 py-3 shadow-lg shadow-blue-500/20" onClick={() => navigate("/contact")}>
               Get Started
             </RainbowButton>
 
             <RainbowButton
               variant="outline"
               className="px-8 py-3 hover:-translate-y-1 transition"
+              onClick={() => navigate("/services")}
             >
               View Services
             </RainbowButton>

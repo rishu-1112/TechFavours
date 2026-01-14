@@ -2,6 +2,7 @@ import GlassCard from "@/components/GlassCard";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   Globe,
   Code2,
@@ -17,6 +18,7 @@ const floatingItems = [
 ];
 
 export default function ServicesCTA() {
+  const navigate = useNavigate();
   return (
     <section className="relative py-32 px-6 overflow-hidden">
 
@@ -105,7 +107,7 @@ export default function ServicesCTA() {
 
           {/* CTA BUTTONS */}
           <div className="mt-12 flex flex-wrap justify-center gap-6">
-            <RainbowButton className="px-9 py-4 text-base shadow-lg">
+            <RainbowButton className="px-9 py-4 text-base shadow-lg" onClick={() => navigate("/contact")}>
               Start Your Project
             </RainbowButton>
 
