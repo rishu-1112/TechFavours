@@ -6,6 +6,8 @@ import Services from "./pages/Services";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import About from "./pages/About";
 import Contact from "./pages/Contact"
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms"
 // Blog Pages
 import Blog from "./pages/blog";
 import BlogSaaS from "./pages/blog/saas";
@@ -26,6 +28,8 @@ export default function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About/>}/>
             <Route path="/contact" element={<Contact/>}/>
+            <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+            <Route path="/terms" element={<Terms/>}/>
             {/* BLOG */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/saas" element={<BlogSaaS />} />
