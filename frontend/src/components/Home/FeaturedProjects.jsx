@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import GlassCard from "@/components/GlassCard";
 import { ExternalLink } from "lucide-react";
+import { Lens } from "../ui/lens";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,9 +17,9 @@ const projects = [
     tech: "React · Node · MongoDB",
     results: ["+42% Orders", "3x Retention", "1.8s Load"],
     images: [
-      "/projects/apkakitchen-1.jpg",
-      "/projects/apkakitchen-2.jpg",
-      "/projects/apkakitchen-3.jpg",
+      "https://res.cloudinary.com/dupwee5cd/image/upload/v1768399385/Screenshot_2026-01-14_at_7.32.34_PM_lroimk.png",
+      "https://res.cloudinary.com/dupwee5cd/image/upload/v1768399145/Screenshot_2026-01-14_at_7.25.11_PM_jkzthk.png",
+      "https://res.cloudinary.com/dupwee5cd/image/upload/v1768399143/Screenshot_2026-01-14_at_7.26.48_PM_claqrc.png",
     ],
     link: "https://apkakitchen.com",
     featured: true,
@@ -30,22 +31,11 @@ const projects = [
     tech: "Next.js · Stripe · Tailwind",
     results: ["+64% Conversion", "99.9% Uptime"],
     images: [
-      "/projects/curewrap-1.jpg",
-      "/projects/curewrap-2.jpg",
+      "https://res.cloudinary.com/dupwee5cd/image/upload/v1768399144/Screenshot_2026-01-14_at_7.27.16_PM_jjditp.png",
+      "https://res.cloudinary.com/dupwee5cd/image/upload/v1768399146/Screenshot_2026-01-14_at_7.28.16_PM_y1a5xo.png",
+      "https://res.cloudinary.com/dupwee5cd/image/upload/v1768399147/Screenshot_2026-01-14_at_7.27.58_PM_onmc5a.png",
     ],
     link: "https://curewrapplus.com",
-  },
-  {
-    title: "Growth CRM",
-    category: "Internal SaaS Tool",
-    desc: "Custom CRM built to scale sales workflows and analytics.",
-    tech: "React · Express · Charts",
-    results: ["2x Productivity", "+38% Sales"],
-    images: [
-      "/projects/crm-1.jpg",
-      "/projects/crm-2.jpg",
-    ],
-    link: "#",
   },
 ];
 
@@ -58,7 +48,6 @@ export default function FeaturedProjects() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Left featured card
       gsap.fromTo(
         leftCardRef.current,
         { x: -120, opacity: 0 },
@@ -74,7 +63,6 @@ export default function FeaturedProjects() {
         }
       );
 
-      // Right stacked cards
       gsap.fromTo(
         rightCardsRef.current,
         { x: 120, opacity: 0 },
@@ -90,51 +78,26 @@ export default function FeaturedProjects() {
           },
         }
       );
-
-      // Image mask reveal
-      gsap.fromTo(
-        ".mask-reveal",
-        { clipPath: "inset(0 100% 0 0)" },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 1.4,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-          },
-        }
-      );
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-32 px-6 max-w-7xl mx-auto"
-    >
-      {/* HEADER */}
+    <section ref={sectionRef} className="relative py-32 px-6 max-w-7xl mx-auto">
       <div className="max-w-3xl mb-16">
         <h2 className="section-title mb-4">Featured Projects</h2>
         <p className="section-subtitle">
-          Selected work demonstrating our execution,
-          craftsmanship, and measurable results.
+          Selected work demonstrating our execution, craftsmanship,
+          and measurable results.
         </p>
       </div>
 
-      {/* ================= DESKTOP ================= */}
       <div className="hidden md:grid grid-cols-3 gap-8">
-        {/* LEFT FEATURED */}
-        <GlassCard
-          ref={leftCardRef}
-          className="col-span-2 p-6 group"
-        >
+        <GlassCard ref={leftCardRef} className="col-span-2 p-6 group">
           <ProjectCard project={projects[0]} featured />
         </GlassCard>
 
-        {/* RIGHT STACK */}
         <div className="flex flex-col gap-8">
           {projects.slice(1).map((project, i) => (
             <GlassCard
@@ -147,39 +110,38 @@ export default function FeaturedProjects() {
           ))}
         </div>
       </div>
-
-      {/* ================= MOBILE CAROUSEL ================= */}
-      <div className="md:hidden flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6">
-        {projects.map((project, i) => (
-          <div key={i} className="min-w-[88%] snap-center">
-            <GlassCard className="p-6">
-              <ProjectCard project={project} />
-            </GlassCard>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
 
-/* ---------------- CARD ---------------- */
+/* ---------------- PROJECT CARD ---------------- */
 
 function ProjectCard({ project, featured }) {
   const cardRef = useRef(null);
+  const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const total = project.images.length;
 
-  /* Parallax tilt (desktop only) */
+  /* Auto crossfade */
+  useEffect(() => {
+    if (total <= 1 || hovered) return;
+
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % total);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [total, hovered]);
+
+  /* Tilt */
   const onMove = (e) => {
     if (window.innerWidth < 768) return;
-
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
-
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
     const rotateX = -(y / rect.height - 0.5) * 8;
     const rotateY = (x / rect.width - 0.5) * 8;
-
     card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   };
 
@@ -191,33 +153,58 @@ function ProjectCard({ project, featured }) {
     <div
       ref={cardRef}
       onMouseMove={onMove}
-      onMouseLeave={resetTilt}
+      onMouseLeave={() => {
+        resetTilt();
+        setHovered(false);
+      }}
+      onMouseEnter={() => setHovered(true)}
       className="transition-transform duration-300 will-change-transform"
       style={{ transformStyle: "preserve-3d" }}
     >
-      {/* IMAGE STRIP */}
+      {/* CINEMATIC CROSSFADE */}
       <div
-        className={`
-          relative overflow-hidden rounded-xl mb-6
-          ${featured ? "h-64" : "h-44"}
-        `}
+        className={`relative overflow-hidden rounded-xl mb-6 ${
+          featured ? "h-64" : "h-44"
+        }`}
       >
-        <div className="flex h-full">
-          {project.images.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt={project.title}
-              className="
-                mask-reveal
-                w-full h-full object-cover flex-shrink-0
-                transition-transform duration-700
-                group-hover:scale-105
-              "
-            />
-          ))}
-        </div>
-        <div className="absolute inset-0 bg-black/20" />
+        {project.images.map((img, i) => (
+          <div
+            key={i}
+            className={`
+              absolute inset-0
+              transition-opacity duration-1000 ease-in-out
+              ${active === i ? "opacity-100 z-10" : "opacity-0"}
+            `}
+          >
+            <Lens>
+              <img
+                src={img}
+                alt={project.title}
+                className="
+                  w-full h-full object-cover
+                  group-hover:scale-105
+                  transition-transform duration-700
+                "
+              />
+            </Lens>
+          </div>
+        ))}
+
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+
+        {total > 1 && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+            {project.images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`w-2.5 h-2.5 rounded-full transition ${
+                  active === i ? "bg-white" : "bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* CONTENT */}
@@ -233,28 +220,19 @@ function ProjectCard({ project, featured }) {
         {project.desc}
       </p>
 
-      {/* RESULTS */}
       <div className="flex flex-wrap gap-2 mt-4">
         {project.results.map((r, i) => (
           <span
             key={i}
-            className="
-              text-xs text-blue-300
-              px-3 py-1 rounded-full
-              bg-white/5
-              border border-white/10
-            "
+            className="text-xs text-blue-300 px-3 py-1 rounded-full bg-white/5 border border-white/10"
           >
             {r}
           </span>
         ))}
       </div>
 
-      {/* FOOTER */}
       <div className="flex items-center justify-between mt-6">
-        <span className="text-xs text-white/50">
-          {project.tech}
-        </span>
+        <span className="text-xs text-white/50">{project.tech}</span>
 
         <a
           href={project.link}

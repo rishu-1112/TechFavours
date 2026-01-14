@@ -3,8 +3,9 @@ import { AuroraText } from "@/components/ui/aurora-text";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { BorderBeam } from "@/components/ui/BorderBeam";
 import { motion } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
 export default function ServicesHero() {
+  const navigate = useNavigate();
   return (
     <section
       className="
@@ -60,11 +61,11 @@ export default function ServicesHero() {
 
           {/* CTA */}
           <div className="mt-10 flex items-center justify-center gap-4 flex-wrap">
-            <RainbowButton>
+            <RainbowButton onClick={() => navigate("/contact")}>
               Start a Project
             </RainbowButton>
 
-            <RainbowButton variant="outline">
+            <RainbowButton variant="outline" onClick={() => navigate("/service-process")}>
               View Process
             </RainbowButton>
           </div>
