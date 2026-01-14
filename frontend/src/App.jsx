@@ -16,6 +16,7 @@ import BlogAI from "./pages/blog/ai";
 import BlogWeb from "./pages/blog/web";
 import BlogPost from "./pages/blog/[slug]";
 import ScrollToTop from "./ScrollToTop";
+import ScrollToTopButton from "./ScrollToTopButton";
 export default function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ export default function App() {
       <SmoothCursor />
       <AnimatePresence mode="wait">
         <ScrollToTop/>
+        <ScrollToTopButton />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />

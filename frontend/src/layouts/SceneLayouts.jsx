@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import { Outlet } from "react-router-dom";
 
 export default function SceneLayout() {
-  return (
+  return (<>
     <div className="relative min-h-[300vh] overflow-hidden bg-night text-white">
       
       {/* 🌌 Global background */}
@@ -19,11 +19,11 @@ export default function SceneLayout() {
 
       {/* 🧭 UI */}
       <Navbar />
-
       {/* 📄 Pages */}
       <main className="relative z-10">
         <Outlet />
       </main>
     </div>
+    </>
   );
 }
