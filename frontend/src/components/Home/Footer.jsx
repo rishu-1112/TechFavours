@@ -96,45 +96,91 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-10 items-start">
 
           {/* BRAND */}
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <img src={logo} alt="TechFavours" className="w-14 h-14" />
-              <span className="text-white font-medium text-lg">
-                TechFavours
-              </span>
-            </div>
-            <p className="text-white/60 text-sm max-w-sm">
-              Building reliable, high-performance digital products
-              with clarity, speed, and precision.
-            </p>
-            {/* SOCIAL LINKS */}
-<div className="flex gap-4 mt-4">
+<div>
+  <div className="flex items-center gap-3 mb-3">
+    <img src={logo} alt="TechFavours" className="w-14 h-14" />
+    <span className="text-white font-medium text-lg">
+      TechFavours
+    </span>
+  </div>
+
+  <p className="text-white/60 text-sm max-w-sm">
+    Building reliable, high-performance digital products
+    with clarity, speed, and precision.
+  </p>
+
+  {/* CONTACT INFO */}
+<div className="mt-4 space-y-2 text-sm text-white/60">
   <a
-    href="https://www.instagram.com/tech_favours_?igsh=MW9xMWZ3ZG1ncTdsMA=="
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-white/60 hover:text-white transition"
-    aria-label="Instagram"
+    href="mailto:hello@techfavours.com"
+    className="flex items-center gap-2 hover:text-white transition"
   >
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1016.5 12 4.5 4.5 0 0012 7.5zm0 7.3A2.8 2.8 0 1114.8 12 2.8 2.8 0 0112 14.8zM17.8 6.2a1 1 0 11-1-1 1 1 0 011 1z"/>
+    {/* MAIL ICON */}
+    <svg
+      className="w-4 h-4 text-white/70"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="M22 6l-10 7L2 6" />
     </svg>
+    <span>hello@techfavours.com</span>
   </a>
 
   <a
-    href="https://www.linkedin.com/company/techfavours"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-white/60 hover:text-white transition"
-    aria-label="LinkedIn"
+    href="tel:+918409636071"
+    className="flex items-center gap-2 hover:text-white transition"
   >
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M4.98 3.5A2.5 2.5 0 105 8.5a2.5 2.5 0 00-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1a4.2 4.2 0 013.8-2.1c4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.4c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/>
+    {/* PHONE ICON */}
+    <svg
+      className="w-4 h-4 text-white/70"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.08 4.18 2 2 0 014.06 2h3a2 2 0 012 1.72c.12.81.3 1.6.54 2.36a2 2 0 01-.45 2L8.09 9.91a16 16 0 006 6l1.83-1.06a2 2 0 012-.45c.76.24 1.55.42 2.36.54a2 2 0 011.72 2z" />
     </svg>
+    <span>+91 84096 36071</span>
   </a>
 </div>
 
-          </div>
+
+  {/* SOCIAL LINKS */}
+  <div className="flex gap-4 mt-4">
+    <a
+      href="https://www.instagram.com/tech_favours_?igsh=MW9xMWZ3ZG1ncTdsMA=="
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-white/60 hover:text-white transition"
+      aria-label="Instagram"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1016.5 12 4.5 4.5 0 0012 7.5zm0 7.3A2.8 2.8 0 1114.8 12 2.8 2.8 0 0112 14.8zM17.8 6.2a1 1 0 11-1-1 1 1 0 011 1z"/>
+      </svg>
+    </a>
+
+    <a
+      href="https://www.linkedin.com/company/techfavours"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-white/60 hover:text-white transition"
+      aria-label="LinkedIn"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M4.98 3.5A2.5 2.5 0 105 8.5a2.5 2.5 0 00-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1a4.2 4.2 0 013.8-2.1c4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.4c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+
           
           {/* LINKS */}
           <div className="flex gap-16">
