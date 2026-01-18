@@ -1,7 +1,26 @@
 import BlogCard from "./BlogCard";
-import { blogs } from "@/data/blogs";
+import { getBlogs } from "@/data/blogs";
+import { useEffect, useState } from "react";
 
 export default function RelatedBlogs({ currentSlug, category }) {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const data = await getBlogs();
+        setBlogs(data);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  if (loading) return null;
+
   const related = blogs
     .filter(
       (b) => b.slug !== currentSlug && b.category === category

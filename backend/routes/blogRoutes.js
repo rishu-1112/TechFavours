@@ -27,4 +27,26 @@ router.get("/", (req, res) => {
   }
 });
 
+router.get("/:slug", (req, res) => {
+  try {
+    const filePath = path.join(BLOG_PATH, `${req.params.slug}.mdx`);
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: "Blog not found" });
+    }
+
+    const source = fs.readFileSync(filePath);
+    const { data, content } = matter(source);
+
+    res.json({
+      slug: req.params.slug,
+      ...data,
+      content,
+      readingTime: readingTime(content).text,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;

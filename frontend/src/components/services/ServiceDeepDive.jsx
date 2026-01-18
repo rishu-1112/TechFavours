@@ -1,85 +1,145 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import GlassCard from "@/components/GlassCard";
 import { AuroraText } from "@/components/ui/aurora-text";
 
+/* ---------------- SERVICES DATA ---------------- */
+
 const services = [
   {
-    title: "Custom Web Development",
+    title: "Website Development",
+    path: "/services/website-development",
     content: [
-      "Modern frontend development using React, Next.js & Tailwind CSS",
-      "SEO-friendly architecture with fast load times and clean code",
-      "Scalable and secure web applications built for long-term growth",
-      "API integrations, authentication systems, and performance optimization",
+      "High-performance, SEO-friendly websites built with modern frameworks",
+      "Clean, maintainable code optimized for speed and scalability",
+      "Responsive layouts that work flawlessly across all devices",
+      "Advanced animations, micro-interactions, and modern UI patterns",
+      "Secure authentication systems and role-based access",
+      "API integrations, CMS setup, and custom admin panels",
+      "Performance optimization for fast load times and stability",
+      "Long-term scalability planning for future growth",
     ],
   },
   {
     title: "SaaS Product Development",
+    path: "/services/saas-product-development",
     content: [
-      "End-to-end SaaS development from MVP to scalable production systems",
-      "User authentication, subscriptions, dashboards, and admin panels",
-      "Cloud-ready architecture for high availability and scalability",
-      "Ongoing feature enhancements based on user feedback and analytics",
+      "End-to-end SaaS development from idea to production",
+      "MVP planning, feature prioritization, and scalable architecture",
+      "User authentication, subscriptions, and billing systems",
+      "Admin dashboards, analytics, and reporting tools",
+      "Cloud-ready backend systems with high availability",
+      "Secure APIs and database design",
+      "Continuous improvements based on real user data",
+      "Long-term product scalability and maintenance support",
     ],
   },
   {
     title: "Mobile App Development",
+    path: "/services/mobile-app-development",
     content: [
-      "Cross-platform mobile apps using React Native",
-      "Smooth animations, gestures, and optimized performance",
-      "Offline support, push notifications, and API integration",
-      "App Store & Play Store deployment with post-launch support",
+      "Cross-platform mobile apps using modern frameworks",
+      "Smooth animations, gestures, and responsive UI",
+      "High-performance apps optimized for low-end devices",
+      "API integration with backend and third-party services",
+      "Offline support and data synchronization",
+      "Push notifications and real-time updates",
+      "App Store & Play Store deployment support",
+      "Post-launch updates and ongoing enhancements",
     ],
   },
   {
     title: "UI / UX Design & Prototyping",
+    path: "/services/ui-ux-design",
     content: [
-      "User research, personas, and experience mapping",
-      "Wireframes, design systems, and interactive prototypes",
-      "Conversion-focused layouts aligned with business goals",
-      "Usability testing, review cycles, and continuous refinements",
+      "User research and behavior analysis",
+      "Wireframes and low-fidelity prototypes",
+      "High-fidelity UI designs aligned with brand identity",
+      "Design systems and reusable components",
+      "Interactive prototypes for real-world testing",
+      "Conversion-focused layouts and flows",
+      "Usability testing and feedback cycles",
+      "Design handoff and collaboration with developers",
     ],
   },
   {
     title: "Backend, APIs & Integrations",
+    path: "/services/cloud-backend-solutions",
     content: [
-      "Secure backend systems using Node.js, Express & databases",
-      "REST and GraphQL APIs designed for performance and reliability",
-      "Role-based access control and data security best practices",
-      "Third-party integrations including payment gateways & tools",
+      "Secure backend systems using modern architectures",
+      "REST and GraphQL APIs built for performance",
+      "Database modeling and optimization",
+      "Authentication, authorization, and security best practices",
+      "Third-party API integrations (payments, tools, CRMs)",
+      "Scalable cloud-ready backend infrastructure",
+      "Monitoring, logging, and error tracking",
+      "Long-term backend maintenance and upgrades",
     ],
   },
   {
     title: "AI Automation & Workflow Systems",
+    path: "/services/ai-automation-workflow",
     content: [
-      "AI-powered automation to streamline business operations",
-      "Workflow optimization using intelligent triggers and logic",
-      "Integration with CRM, marketing, and operational tools",
-      "Reduced manual effort, improved efficiency, and cost savings",
+      "AI-powered automation for repetitive business tasks",
+      "Custom workflows using APIs and automation tools",
+      "Integration with CRMs, marketing, and operations tools",
+      "Smart triggers, conditions, and intelligent logic",
+      "Reduced manual work and operational costs",
+      "Improved efficiency and faster execution",
+      "Custom dashboards for monitoring automations",
+      "Ongoing optimization and workflow improvements",
     ],
   },
   {
-    title: "Website Management & Enhancements",
+    title: "Website Management & Maintenance",
+    path: "/services/website-management-maintenance",
     content: [
-      "Ongoing website maintenance, updates, and performance monitoring",
-      "Day-to-day improvements and feature enhancements",
-      "Regular client notifications on changes and optimizations",
-      "Security updates, backups, and stability checks",
+      "Continuous website monitoring and uptime checks",
+      "Regular security updates and vulnerability fixes",
+      "Performance optimization and speed improvements",
+      "Content updates and layout enhancements",
+      "Bug fixes and technical issue resolution",
+      "Backup management and recovery planning",
+      "Monthly performance and health reports",
+      "Long-term website stability and support",
     ],
   },
   {
     title: "SEO, Growth & Performance Optimization",
+    path: "/services/seo-performance-optimization",
     content: [
-      "On-page SEO, technical SEO, and performance optimization",
-      "Core Web Vitals improvements for better rankings",
-      "Analytics-driven enhancements and growth strategies",
-      "Continuous review, testing, and measurable improvements",
+      "Technical SEO and site structure optimization",
+      "Core Web Vitals and page speed improvements",
+      "On-page SEO and keyword optimization",
+      "Analytics setup and performance tracking",
+      "Conversion rate optimization strategies",
+      "Content optimization for search visibility",
+      "Continuous testing and improvement cycles",
+      "Measurable growth-focused results",
+    ],
+  },
+  {
+    title: "Digital Marketing & Growth Strategy",
+    path: "/services/digital-marketing-growth",
+    content: [
+      "Data-driven marketing strategies for growth",
+      "Paid advertising campaign planning and execution",
+      "Social media strategy and brand positioning",
+      "Lead generation and conversion optimization",
+      "Analytics-driven campaign improvements",
+      "Audience targeting and segmentation",
+      "Performance reporting and insights",
+      "Long-term growth roadmap planning",
     ],
   },
 ];
 
+/* ---------------- COMPONENT ---------------- */
+
 export default function ServiceDeepDive() {
   const [active, setActive] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <section
@@ -92,16 +152,16 @@ export default function ServiceDeepDive() {
           How We <AuroraText>Deliver Excellence</AuroraText>
         </h2>
         <p className="section-subtitle mt-4">
-          A detailed look into how our web development, SaaS solutions,
-          AI automation, and digital services are planned, executed,
-          reviewed, and continuously improved.
+          A transparent look into how our digital services are designed,
+          executed, optimized, and continuously improved to drive real
+          business results.
         </p>
       </div>
 
       {/* MAIN GRID */}
-      <div className="grid lg:grid-cols-[300px_1fr] gap-16">
+      <div className="grid lg:grid-cols-[320px_1fr] gap-16">
 
-        {/* LEFT — STICKY SERVICE NAV */}
+        {/* LEFT — SERVICE NAV */}
         <div className="relative">
           <div className="sticky top-32 flex flex-col gap-3">
             {services.map((service, i) => (
@@ -129,7 +189,7 @@ export default function ServiceDeepDive() {
         </div>
 
         {/* RIGHT — SERVICE DETAILS */}
-        <div className="relative min-h-[320px]">
+        <div className="relative min-h-[360px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -139,9 +199,14 @@ export default function ServiceDeepDive() {
               transition={{ duration: 0.45, ease: "easeOut" }}
             >
               <GlassCard className="p-10">
-                <h3 className="text-2xl font-semibold text-white mb-6">
-                  {services[active].title}
-                </h3>
+                <button
+                  onClick={() => navigate(services[active].path)}
+                  className="text-left"
+                >
+                  <h3 className="text-2xl font-semibold text-white mb-6 hover:underline">
+                    {services[active].title}
+                  </h3>
+                </button>
 
                 <ul className="space-y-4">
                   {services[active].content.map((item, i) => (

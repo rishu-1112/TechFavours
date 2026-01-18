@@ -1,46 +1,60 @@
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import GlassCard from "@/components/GlassCard";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
+
+/* ---------------- SERVICES DATA ---------------- */
 
 const services = [
   {
     title: "Custom Web Development",
     desc: "High-performance, SEO-friendly websites and web applications built with modern frameworks, scalable architecture, and long-term maintainability in mind.",
+    path: "/services/website-development",
   },
   {
     title: "SaaS Product Development",
     desc: "End-to-end SaaS development including MVPs, dashboards, authentication, subscriptions, and scalable backend systems designed for growth.",
+    path: "/services/saas-product-development",
   },
   {
     title: "Mobile App Development",
     desc: "Cross-platform mobile applications with smooth UX, optimized performance, and seamless integration with APIs and cloud services.",
+    path: "/services/mobile-app-development",
   },
   {
     title: "UI / UX Design & Prototyping",
     desc: "User-centric UI/UX design backed by research, wireframes, and interactive prototypes that improve usability, engagement, and conversions.",
+    path: "/services/ui-ux-design",
   },
   {
     title: "Backend, APIs & Integrations",
     desc: "Secure, scalable backend systems, REST & GraphQL APIs, and third-party integrations built for reliability, performance, and data security.",
+    path: "/services/cloud-backend-solutions",
   },
   {
     title: "AI Automation & Workflow Systems",
     desc: "AI-powered automations, intelligent workflows, and business process optimization using modern AI tools to save time and reduce costs.",
+    path: "/services/ai-automation-workflow",
   },
   {
     title: "Website Management & Optimization",
     desc: "Ongoing website maintenance, performance optimization, security updates, content improvements, and day-to-day enhancement support.",
+    path: "/services/website-management-maintenance",
   },
   {
     title: "Cloud, DevOps & Infrastructure",
     desc: "Cloud deployment, CI/CD pipelines, monitoring, and infrastructure optimization to ensure high availability, scalability, and cost efficiency.",
+    path: "/services/cloud-devops-infrastructure",
   },
   {
     title: "Growth, SEO & Performance Optimization",
     desc: "Data-driven SEO, performance tuning, analytics, and continuous optimization focused on traffic growth, conversions, and measurable results.",
+    path: "/services/seo-performance-optimization",
   },
 ];
+
+/* ---------------- MAIN COMPONENT ---------------- */
 
 export default function ServicesGrid() {
   return (
@@ -63,7 +77,7 @@ export default function ServicesGrid() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, i) => (
           <motion.div
-            key={i}
+            key={service.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
@@ -84,14 +98,20 @@ export default function ServicesGrid() {
 /* ---------------- SERVICE CARD ---------------- */
 
 function ServiceCard({ service }) {
+  const navigate = useNavigate();
+
   return (
     <GlassCard
+      onClick={() => navigate(service.path)}
+      role="link"
+      aria-label={`Explore ${service.title}`}
       className="
         relative
         p-8
         h-full
         group
         overflow-hidden
+        cursor-pointer
       "
     >
       {/* AURORA HOVER GLOW */}
@@ -117,9 +137,27 @@ function ServiceCard({ service }) {
         </p>
 
         {/* CTA */}
-        <div className="mt-6 flex items-center gap-2 text-sm text-white/70 group-hover:text-white transition">
+        <div
+          className="
+            mt-6
+            inline-flex
+            items-center
+            gap-2
+            text-sm
+            text-white/70
+            group-hover:text-white
+            transition
+          "
+        >
           <span>Explore service</span>
-          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          <ArrowUpRight
+            className="
+              w-4 h-4
+              transition-transform
+              group-hover:translate-x-1
+              group-hover:-translate-y-1
+            "
+          />
         </div>
       </div>
     </GlassCard>
